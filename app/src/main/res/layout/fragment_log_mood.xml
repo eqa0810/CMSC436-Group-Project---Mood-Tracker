@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/log_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/text_greeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How are you feeling today?"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/text_today_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today – 2025-11-19"
+            android:textSize="16sp"
+            android:paddingBottom="16dp" />
+
+        <TextView
+            android:id="@+id/text_mood_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mood: 5 / 10"
+            android:textSize="16sp" />
+
+        <SeekBar
+            android:id="@+id/seekbar_mood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="9"
+            android:progress="4"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp" />
+
+        <TextView
+            android:id="@+id/text_journal_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Journal"
+            android:textSize="16sp"
+            android:paddingBottom="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edittext_journal"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:gravity="top|start"
+                android:hint="Write a few words about your day..."
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:padding="8dp" />
+
+            <ImageButton
+                android:id="@+id/button_mic"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Speak to log"
+                android:src="@drawable/ic_mic" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_save_mood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Save mood"
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:id="@+id/ad_container_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+</ScrollView>
