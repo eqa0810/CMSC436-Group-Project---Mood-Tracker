@@ -6,7 +6,6 @@ This screen is where the user logs today’s mood with a SeekBar and writes a jo
 
 ### Already satisfies:
 - Uses at least one new GUI component (SeekBar).  
-- Has space for the required fake Google ad.  
 - Counts as one of “at least 3 views.”  
 - Includes an ad placeholder  
 
