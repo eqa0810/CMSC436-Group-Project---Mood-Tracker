@@ -58,8 +58,6 @@ This part holds the fragment container and bottom navigation bar.
 
 ---
 
-## ___________________________________________________________________________
-
 ## Overall, what our project still needs  
 - A nice looking app icon.  
 - Actual Model classes for mood entries and user prefs.  
