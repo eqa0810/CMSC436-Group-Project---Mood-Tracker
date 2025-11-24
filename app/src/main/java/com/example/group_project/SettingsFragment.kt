@@ -47,12 +47,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             }
         }
 
-        // Switch daily reminder
         reminderSwitch.setOnCheckedChangeListener { _, isChecked ->
             model.saveReminderEnabled(isChecked)
         }
-
-        // Change reminder time
         pickTimeButton.setOnClickListener {
             val currHour = model.getReminderHour()
             val currMinute = model.getReminderMinute()
