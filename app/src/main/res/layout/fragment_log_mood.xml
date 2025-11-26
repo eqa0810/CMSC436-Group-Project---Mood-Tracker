@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="How are you feeling today?"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:paddingBottom="8dp" />
 
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:text="Today – 2025-11-19"
             android:textSize="16sp"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="30dp" />
 
         <TextView
             android:id="@+id/text_mood_label"
@@ -42,7 +42,7 @@
             android:max="9"
             android:progress="4"
             android:paddingTop="8dp"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="30dp" />
 
         <TextView
             android:id="@+id/text_journal_label"
@@ -83,7 +83,7 @@
             android:id="@+id/button_save_mood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="30dp"
             android:text="Save mood"
             android:textSize="16sp"/>
 
@@ -91,7 +91,7 @@
             android:id="@+id/button_share_mood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="5dp"
             android:text="Share Today’s Mood"
             android:backgroundTint="#CC5500"
             android:textSize="16sp" />
@@ -101,6 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingTop="10dp"
             android:gravity="center_horizontal"
             android:layout_marginTop="16dp" />
 

@@ -6,6 +6,15 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:id="@+id/calendar_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calendar"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:paddingBottom="10dp" />
+
     <CalendarView
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
