@@ -32,6 +32,7 @@ This screen shows the CalendarView and a color legend, and it displays the selec
 ### Still needs:
 
 - Reading mood entries from Firebase and showing the correct score/color.
+- Note about the Firebase data: need to fix the indexing since the mood repository functions don't seem to be working.
 - Passing the same Model data as the Log Mood to meet “views use the same data.”
 - Updating the selected date panel when the user picks a day (listener on CalendarView).
 
