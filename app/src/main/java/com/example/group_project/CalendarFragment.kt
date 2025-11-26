@@ -32,10 +32,12 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         selectedScoreText = view.findViewById(R.id.text_selected_score)
         selectedNoteText = view.findViewById(R.id.text_selected_note)
 
+        loadInitialDate()
+
         // Listen for date selection
-        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+        calendarView.setOnDateChangeListener { _, year, month, day ->
             val calendar = Calendar.getInstance().apply {
-                set(year, month, dayOfMonth, 0, 0, 0)
+                set(year, month, day, 0, 0, 0)
                 set(Calendar.MILLISECOND, 0)
             }
 
@@ -43,14 +45,14 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
             val startTimestamp = calendar.timeInMillis
             val endTimestamp = startTimestamp + 24 * 60 * 60 * 1000 - 1
 
-            selectedDateText.text = "${dayOfMonth}/${month + 1}/$year"
+            selectedDateText.text = "${month + 1}/${day}/$year"
 
             // Query Firebase for moods on this date
             moodRepository.getMoodsByDateRange(userId, startTimestamp, endTimestamp,
                 onSuccess = { moods ->
                     Log.d("CalendarFragment", "Moods fetched: ${moods.size}")
                     if (moods.isNotEmpty()) {
-                        val mood = moods.first()
+                        val mood = moods.last()
                         selectedScoreText.text = "Mood: ${mood.getMoodScore()}/10"
                         selectedNoteText.text = mood.journalText ?: "No note for this day"
                     } else {
@@ -66,5 +68,47 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
             )
         }
     }
+
+    private fun loadInitialDate() {
+        val initialMillis = calendarView.date
+
+        val cal = Calendar.getInstance().apply {
+            timeInMillis = initialMillis
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+
+        val year = cal.get(Calendar.YEAR)
+        val month = cal.get(Calendar.MONTH)
+        val day = cal.get(Calendar.DAY_OF_MONTH)
+
+        val startTimestamp = cal.timeInMillis
+        val endTimestamp = startTimestamp + 24 * 60 * 60 * 1000 - 1
+
+        selectedDateText.text = "${month + 1}/${day}/$year"
+
+        moodRepository.getMoodsByDateRange(
+            userId,
+            startTimestamp,
+            endTimestamp,
+            onSuccess = { moods ->
+                if (moods.isNotEmpty()) {
+                    val mood = moods.last()
+                    selectedScoreText.text = "Mood: ${mood.getMoodScore()}/10"
+                    selectedNoteText.text = mood.journalText ?: "No note for this day"
+                } else {
+                    selectedScoreText.text = "Mood: --/10"
+                    selectedNoteText.text = "No entry for this day."
+                }
+            },
+            onFailure = {
+                selectedScoreText.text = "Mood: --/10"
+                selectedNoteText.text = "Failed to load entry."
+            }
+        )
+    }
+
 }
 

@@ -23,13 +23,14 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         model = UserPreferencesRepository(requireContext())
 
         val nicknameEdit = view.findViewById<EditText>(R.id.edittext_nickname)
+        val emailEdit = view.findViewById<EditText>(R.id.edittext_email)
         val reminderSwitch = view.findViewById<Switch>(R.id.switch_reminder)
         val reminderTime = view.findViewById<TextView>(R.id.text_reminder_time)
         val pickTimeButton = view.findViewById<Button>(R.id.button_pick_reminder_time)
 
         // Utilize model
         nicknameEdit.setText(model.userName)
-
+        emailEdit.setText(model.userEmail)
 
 
         // Assume most commented out code is reminder related, will delete/keep as needed
@@ -57,6 +58,10 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             if (!hasFocus) {
                 model.userName = (nicknameEdit.text.toString())
             }
+        }
+
+        emailEdit.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) model.userEmail = emailEdit.text.toString()
         }
 
         /*
