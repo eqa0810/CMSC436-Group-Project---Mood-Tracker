@@ -11,7 +11,8 @@ This screen is where the user logs today’s mood with a SeekBar and writes a jo
 - Counts as one of “at least 3 views.”
 - Includes an ad placeholder  
   -- Saving mood entries into the Model, send it to Firebase for remote persistent data.
-
+- Includes meaningful phone functionality through an email-sharing button.
+  
 ### Still needs:
 
 - Actual voice recognition(speech->text) so it fulfill “meaningful use of another app.”
@@ -47,12 +48,13 @@ This screen lets the user set nickname, toggle reminders, and change reminder ti
 
 - Provides a place for meaningful local settings.
 - Counts as a third view
-- Currently saves all settings on the page
+- Currently saves all settings(nickname, email) on the page to local storage.
 
 ### Still needs:
 
 - Should remove the notifications settings most likely, as it currently does not do anything (though the information is saved)
 - Optional: wiring reminder time to a notification system to improve functionality.
+  
 
 ---
 
