@@ -48,7 +48,7 @@ This screen lets the user set nickname, toggle reminders, and change reminder ti
 
 - Provides a place for meaningful local settings.
 - Counts as a third view
-- Currently saves all settings(nickname, email) on the page to local storage.
+- Currently saves all settings (nickname, email) on the page to local storage.
 
 ### Still needs:
 
@@ -75,7 +75,6 @@ This part holds the fragment container and bottom navigation bar.
 
 ## Overall, what our project still needs
 
-- A nice looking app icon.
 - Actual Model classes for mood entries and user prefs.
 - Write and read all mood data through a Model layer (MVC).
 - Save at least two meaningful local variables using SharedPreferences.
