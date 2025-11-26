@@ -8,18 +8,19 @@ import android.widget.EditText
 import android.widget.Switch
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.group_project.repository.UserPreferencesRepository
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
-    private lateinit var model: SettingsModel
+    private lateinit var model: UserPreferencesRepository
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        model = SettingsModel(requireContext())
+        model = UserPreferencesRepository(requireContext())
 
         val nicknameEdit = view.findViewById<EditText>(R.id.edittext_nickname)
         val reminderSwitch = view.findViewById<Switch>(R.id.switch_reminder)
@@ -27,8 +28,13 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         val pickTimeButton = view.findViewById<Button>(R.id.button_pick_reminder_time)
 
         // Utilize model
-        nicknameEdit.setText(model.getNickname())
+        nicknameEdit.setText(model.userName)
+
+        // Assume most commented out code is reminder related, will delete/keep as needed
+
+        /*
         reminderSwitch.isChecked = model.isReminderEnabled()
+
 
         val date = Date(0)
         date.hours = model.getReminderHour()
@@ -36,17 +42,22 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
         val initialTime = sdf.format(date)
 
+
+
         reminderTime.text = "Reminder time: $initialTime"
+        */
+
 
         // controller stuff
 
         // Save nickname anytime it changes
         nicknameEdit.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                model.saveNickname(nicknameEdit.text.toString())
+                model.userName = (nicknameEdit.text.toString())
             }
         }
 
+        /*
         reminderSwitch.setOnCheckedChangeListener { _, isChecked ->
             model.saveReminderEnabled(isChecked)
         }
@@ -69,6 +80,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 true
             ).show()
         }
+        */
     }
+
+
 
 }
