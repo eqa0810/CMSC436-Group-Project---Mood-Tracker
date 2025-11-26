@@ -30,6 +30,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         // Utilize model
         nicknameEdit.setText(model.userName)
 
+
+
         // Assume most commented out code is reminder related, will delete/keep as needed
 
         /*

@@ -1,5 +1,6 @@
 package com.example.group_project
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -23,7 +24,7 @@ class LogMoodFragment : Fragment(R.layout.fragment_log_mood) {
     private var adView: AdView? = null
     private lateinit var moodRepository: MoodRepository
     private lateinit var userPrefsRepository: UserPreferencesRepository
-    
+
     private lateinit var greetingText: TextView
     private lateinit var dateText: TextView
     private lateinit var moodLabel: TextView
@@ -32,6 +33,8 @@ class LogMoodFragment : Fragment(R.layout.fragment_log_mood) {
     private lateinit var saveMoodButton: Button
     
     private var currentMoodScore = 5
+
+    private lateinit var shareMoodButton: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,6 +56,8 @@ class LogMoodFragment : Fragment(R.layout.fragment_log_mood) {
         moodSeekBar = view.findViewById(R.id.seekbar_mood)
         journalEditText = view.findViewById(R.id.edittext_journal)
         saveMoodButton = view.findViewById(R.id.button_save_mood)
+        shareMoodButton = view.findViewById(R.id.button_share_mood)
+
     }
 
     private fun setupAds(view: View) {
@@ -74,10 +79,35 @@ class LogMoodFragment : Fragment(R.layout.fragment_log_mood) {
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
+        }
+        )
+
+        shareMoodButton.setOnClickListener {
+            shareMoodByEmail()
+        }
 
         saveMoodButton.setOnClickListener {
             saveMood()
+        }
+    }
+
+    private fun shareMoodByEmail() {
+        val moodText = "Mood today: $currentMoodScore / 10"
+        val journal = journalEditText.text.toString().ifEmpty { "(no journal entry)" }
+
+        val emailBody = "$moodText\n\nJournal:\n$journal"
+
+        val emailIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(""))  // blank or saved email
+            putExtra(Intent.EXTRA_SUBJECT, "My mood today")
+            putExtra(Intent.EXTRA_TEXT, emailBody)
+        }
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Choose Email Client..."))
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "No email app found", Toast.LENGTH_SHORT).show()
         }
     }
 

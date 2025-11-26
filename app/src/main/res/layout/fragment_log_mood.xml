@@ -87,6 +87,15 @@
             android:text="Save mood"
             android:textSize="16sp"/>
 
+        <Button
+            android:id="@+id/button_share_mood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Share Today’s Mood"
+            android:backgroundTint="#CC5500"
+            android:textSize="16sp" />
+
         <LinearLayout
             android:id="@+id/ad_container_log"
             android:layout_width="match_parent"

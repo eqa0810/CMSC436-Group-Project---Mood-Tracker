@@ -11,6 +11,10 @@ class UserPreferencesRepository(context: Context) {
         get() = prefs.getString(KEY_USER_NAME, "") ?: ""
         set(value) = prefs.edit { putString(KEY_USER_NAME, value) }
 
+    var userEmail: String
+        get() = prefs.getString(KEY_USER_EMAIL, "") ?: ""
+        set(value) = prefs.edit { putString(KEY_USER_EMAIL, value) }
+
     var userId: String
         get() {
             var id = prefs.getString(KEY_USER_ID, null)
@@ -30,5 +34,6 @@ class UserPreferencesRepository(context: Context) {
         private const val PREFS_NAME = "mood_tracker_prefs"
         private const val KEY_USER_NAME = "user_name"
         private const val KEY_USER_ID = "user_id"
+        private const val KEY_USER_EMAIL = "user_email"
     }
 }
