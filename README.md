@@ -46,10 +46,11 @@ This screen lets the user set nickname, toggle reminders, and change reminder ti
 
 - Provides a place for meaningful local settings.
 - Counts as a third view
+- Currently saves all settings on the page
 
 ### Still needs:
 
-- Actually saving and loading at least two persistent local variables with SharedPreferences.
+- Should remove the notifications settings most likely, as it currently does not do anything (though the information is saved)
 - Optional: wiring reminder time to a notification system to improve functionality.
 
 ---
