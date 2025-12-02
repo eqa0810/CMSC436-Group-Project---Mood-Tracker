@@ -43,4 +43,14 @@ class SettingsModel(context: Context) {
     fun getReminderMinute(): Int {
         return prefs.getInt("reminder_minute", 0)
     }
+
+    fun saveDarkModeEnabled(enabled: Boolean) {
+        val editor = prefs.edit()
+        editor.putBoolean("dark_mode_enabled", enabled)
+        editor.commit()
+    }
+
+    fun isDarkModeEnabled(): Boolean {
+        return prefs.getBoolean("dark_mode_enabled", false)
+    }
 }

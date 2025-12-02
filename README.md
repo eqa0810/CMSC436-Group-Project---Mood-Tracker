@@ -40,7 +40,7 @@ This screen shows the CalendarView and a color legend, and it displays the selec
 ## Settings screen
 
 **XML:** `fragment_settings.xml`  
-This screen lets the user set nickname, toggle reminders, and change reminder time.
+This screen lets the user set nickname, toggle reminders, change reminder time, light/dark mode.
 
 ### Already satisfies:
 

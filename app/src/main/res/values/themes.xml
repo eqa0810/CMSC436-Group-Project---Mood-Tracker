@@ -1,8 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Group_project" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/mood_good</item>
+        <item name="colorPrimaryVariant">@color/mood_excellent</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/mood_neutral</item>
+        <item name="colorSecondaryVariant">@color/mood_low</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <item name="android:windowBackground">@color/white</item>
+        <item name="backgroundColor">@color/white</item>
     </style>
 
     <style name="Theme.Group_project" parent="Base.Theme.Group_project" />
