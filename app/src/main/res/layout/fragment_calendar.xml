@@ -139,7 +139,7 @@
             android:id="@+id/text_average_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Average mood rating across users"
+            android:text="Average mood rating across all users"
             android:textStyle="bold"
             android:textSize="18sp"
             android:paddingBottom="4dp" />
