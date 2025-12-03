@@ -62,4 +62,44 @@ class MoodRepository {
                 onFailure(exception)
             }
     }
+
+    fun getNewestMoodPerUserForDay(
+        startTimestamp: Long,
+        endTimestamp: Long,
+        onSuccess: (List<Double>) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        moodsCollection
+            .whereGreaterThanOrEqualTo("timestamp", startTimestamp)
+            .whereLessThanOrEqualTo("timestamp", endTimestamp)
+            .get()
+            .addOnSuccessListener { snapshot ->
+
+                val moodEntries = snapshot.documents.mapNotNull { document ->
+                    val moodEntry = document.toObject(MoodEntry::class.java)
+                    moodEntry?.apply { id = document.id }
+                }
+
+                // Group by userId
+                val groupUsers = moodEntries.groupBy { moodEntry -> moodEntry.userId }
+
+                // Take newest entry per user
+                val newestUserEntries = groupUsers.mapNotNull { (_, moodsForUser) ->
+                    val newestMood = moodsForUser.maxByOrNull { mood -> mood.timestamp }
+                    newestMood?.getMoodScore()?.toDouble()
+                }
+
+                onSuccess(newestUserEntries)
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
+
+
+
+
+
+
+
 }

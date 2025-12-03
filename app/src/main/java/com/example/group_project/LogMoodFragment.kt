@@ -1,6 +1,7 @@
 package com.example.group_project
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -97,9 +98,9 @@ class LogMoodFragment : Fragment(R.layout.fragment_log_mood) {
 
         val emailBody = "$moodText\n\nJournal:\n$journal"
 
-        val emailIntent = Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain"
-            putExtra(Intent.EXTRA_EMAIL, arrayOf(""))  // blank or saved email
+        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:")
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(userPrefsRepository.userEmail))  // blank or saved email
             putExtra(Intent.EXTRA_SUBJECT, "My mood today")
             putExtra(Intent.EXTRA_TEXT, emailBody)
         }

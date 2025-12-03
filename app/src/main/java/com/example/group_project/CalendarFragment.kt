@@ -1,7 +1,6 @@
 package com.example.group_project
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.CalendarView
 import android.widget.TextView
@@ -17,6 +16,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
     private lateinit var selectedDateText: TextView
     private lateinit var selectedScoreText: TextView
     private lateinit var selectedNoteText: TextView
+    private lateinit var averageScoreText: TextView
     private lateinit var calendarView: CalendarView
     private lateinit var model: UserPreferencesRepository
 
@@ -31,6 +31,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         selectedDateText = view.findViewById(R.id.text_selected_date)
         selectedScoreText = view.findViewById(R.id.text_selected_score)
         selectedNoteText = view.findViewById(R.id.text_selected_note)
+        averageScoreText = view.findViewById(R.id.text_average_score)
 
         loadInitialDate()
 
@@ -50,7 +51,6 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
             // Query Firebase for moods on this date
             moodRepository.getMoodsByDateRange(userId, startTimestamp, endTimestamp,
                 onSuccess = { moods ->
-                    Log.d("CalendarFragment", "Moods fetched: ${moods.size}")
                     if (moods.isNotEmpty()) {
                         val mood = moods.last()
                         selectedScoreText.text = "Mood: ${mood.getMoodScore()}/10"
@@ -60,14 +60,31 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
                         selectedNoteText.text = "No entry for this day."
                     }
                 },
-                onFailure = { exception ->
-                    Log.d("CalendarFragment", "failed")
+                onFailure = { _ ->
                     selectedScoreText.text = "Mood: --/10"
                     selectedNoteText.text = "Failed to load entry."
                 }
             )
+
+            moodRepository.getNewestMoodPerUserForDay(
+                startTimestamp,
+                endTimestamp,
+                onSuccess = { newestRatings ->
+                    if (newestRatings.isNotEmpty()) {
+                        val averageMood = newestRatings.average()
+                        val roundedAverage = (averageMood * 10).toInt() / 10.0
+                        averageScoreText.text = "Average mood: $roundedAverage / 10"
+                    } else {
+                        averageScoreText.text = "No user entries"
+                    }
+                },
+                onFailure = { _ ->
+                    averageScoreText.text = "Error loading data"
+                }
+            )
         }
     }
+
 
     private fun loadInitialDate() {
         val initialMillis = calendarView.date
@@ -106,6 +123,23 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
             onFailure = {
                 selectedScoreText.text = "Mood: --/10"
                 selectedNoteText.text = "Failed to load entry."
+            }
+        )
+
+        moodRepository.getNewestMoodPerUserForDay(
+            startTimestamp,
+            endTimestamp,
+            onSuccess = { newestRatings ->
+                if (newestRatings.isNotEmpty()) {
+                    val averageMood = newestRatings.average()
+                    val roundedAverage = (averageMood * 10).toInt() / 10.0
+                    averageScoreText.text = "Average mood: $roundedAverage / 10"
+                } else {
+                    averageScoreText.text = "No user entries"
+                }
+            },
+            onFailure = { _ ->
+                averageScoreText.text = "Error loading data"
             }
         )
     }

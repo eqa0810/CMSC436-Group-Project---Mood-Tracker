@@ -126,4 +126,32 @@
             android:paddingTop="4dp" />
     </LinearLayout>
 
+    <!-- Average mood across users -->
+    <LinearLayout
+        android:id="@+id/layout_average_mood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/text_average_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Average mood rating across users"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/text_average_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-- / 10"
+            android:textSize="16sp"
+            android:paddingBottom="4dp" />
+
+    </LinearLayout>
+
 </LinearLayout>
