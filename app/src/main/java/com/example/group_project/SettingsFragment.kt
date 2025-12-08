@@ -10,35 +10,39 @@ import com.example.group_project.repository.UserPreferencesRepository
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
-    private lateinit var model: UserPreferencesRepository
-    private lateinit var settingsModel: SettingsModel
+    private lateinit var prefsRepository: UserPreferencesRepository
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        model = UserPreferencesRepository(requireContext())
-        settingsModel = SettingsModel(requireContext())
+        // Initialize single repository for all preferences
+        prefsRepository = UserPreferencesRepository(requireContext())
 
         val nicknameEdit = view.findViewById<EditText>(R.id.edittext_nickname)
         val emailEdit = view.findViewById<EditText>(R.id.edittext_email)
         val darkModeSwitch = view.findViewById<Switch>(R.id.switch_dark_mode)
 
-        nicknameEdit.setText(model.userName)
-        emailEdit.setText(model.userEmail)
-        darkModeSwitch.isChecked = settingsModel.isDarkModeEnabled()
+        // Load all preferences from single repository
+        nicknameEdit.setText(prefsRepository.userName)
+        emailEdit.setText(prefsRepository.userEmail)
+        darkModeSwitch.isChecked = prefsRepository.isDarkModeEnabled
 
+        // Nickname change listener
         nicknameEdit.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                model.userName = (nicknameEdit.text.toString())
+                prefsRepository.userName = nicknameEdit.text.toString()
             }
         }
 
+        // Email change listener
         emailEdit.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) model.userEmail = emailEdit.text.toString()
+            if (!hasFocus) {
+                prefsRepository.userEmail = emailEdit.text.toString()
+            }
         }
 
         darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            settingsModel.saveDarkModeEnabled(isChecked)
+            prefsRepository.isDarkModeEnabled = isChecked
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
