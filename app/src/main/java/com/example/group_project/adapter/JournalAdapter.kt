@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.group_project.MoodEntry
 import com.example.group_project.R
+import com.google.android.material.color.MaterialColors
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -30,6 +32,7 @@ class JournalAdapter(private val entries: List<MoodEntry>) :
 
     override fun onBindViewHolder(holder: JournalViewHolder, position: Int) {
         val entry = entries[position]
+        val context = holder.itemView.context
         
         val dateFormat = SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.getDefault())
         val timeFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
@@ -46,10 +49,16 @@ class JournalAdapter(private val entries: List<MoodEntry>) :
         val text = entry.journalText
         if (text.isNullOrEmpty()) {
             holder.journalText.text = "No journal entry for this mood."
-            holder.journalText.setTextColor(Color.parseColor("#9E9E9E"))
+            // Use theme-aware color for empty state
+            holder.journalText.setTextColor(
+                MaterialColors.getColor(context, com.google.android.material.R.attr.colorOnSurfaceVariant, Color.GRAY)
+            )
         } else {
             holder.journalText.text = text
-            holder.journalText.setTextColor(Color.parseColor("#4E342E"))
+            // Use theme-aware color for text
+            holder.journalText.setTextColor(
+                MaterialColors.getColor(context, com.google.android.material.R.attr.colorOnSurface, Color.BLACK)
+            )
         }
     }
 

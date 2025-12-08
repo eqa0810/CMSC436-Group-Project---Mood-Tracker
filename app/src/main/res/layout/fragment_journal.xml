@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/journal_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FDF6E3">
+    android:background="?attr/backgroundColor">
 
     <TextView
+        android:id="@+id/journal_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My Journal"
@@ -14,12 +16,12 @@
         android:fontFamily="serif"
         android:padding="20dp"
         android:gravity="center"
-        android:textColor="#5D4037" />
+        android:textColor="?attr/colorOnBackground" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#D7CCC8"
+        android:background="?attr/colorOutline"
         android:layout_marginHorizontal="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -38,7 +40,7 @@
         android:gravity="center"
         android:text="No journal entries yet.\nStart logging your mood!"
         android:textSize="16sp"
-        android:textColor="#8D6E63"
+        android:textColor="?attr/colorOnSurfaceVariant"
         android:fontFamily="serif"
         android:visibility="gone" />
 
