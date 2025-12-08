@@ -26,6 +26,10 @@ class UserPreferencesRepository(context: Context) {
         }
         private set(value) = prefs.edit { putString(KEY_USER_ID, value) }
 
+    var isDarkModeEnabled: Boolean
+        get() = prefs.getBoolean(KEY_DARK_MODE_ENABLED, false)
+        set(value) = prefs.edit { putBoolean(KEY_DARK_MODE_ENABLED, value) }
+
     private fun generateUserId(): String {
         return "user_${System.currentTimeMillis()}_${(1000..9999).random()}"
     }
@@ -35,5 +39,6 @@ class UserPreferencesRepository(context: Context) {
         private const val KEY_USER_NAME = "user_name"
         private const val KEY_USER_ID = "user_id"
         private const val KEY_USER_EMAIL = "user_email"
+        private const val KEY_DARK_MODE_ENABLED = "dark_mode_enabled"
     }
 }
