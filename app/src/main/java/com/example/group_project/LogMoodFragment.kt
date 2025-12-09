@@ -98,8 +98,8 @@ class LogMoodFragment : Fragment(R.layout.fragment_log_mood) {
 
         val emailBody = "$moodText\n\nJournal:\n$journal"
 
-        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:")
+        val emailIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "message/rfc822"
             putExtra(Intent.EXTRA_EMAIL, arrayOf(userPrefsRepository.userEmail))  // blank or saved email
             putExtra(Intent.EXTRA_SUBJECT, "My mood today")
             putExtra(Intent.EXTRA_TEXT, emailBody)
